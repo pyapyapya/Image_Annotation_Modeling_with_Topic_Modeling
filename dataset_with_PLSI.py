@@ -41,6 +41,7 @@ class Preprocess:
 
             object_list: List = sorted(set(object_id_name.values()))
             corpus = np.zeros((len(image_id_list), len(object_list)))
+            corpus = np.zeros((len(image_id_list), len(object_list)), type=np.int)
 
             for doc_idx, data in tqdm(enumerate(visual_genome_data[:300])):
                 for objects in data['objects']:
@@ -197,7 +198,6 @@ class PLSA:
 
     # Expectation Step
     def _e_step(self, pwz_matrix: np.array, pdz_matrix: np.array, pz: np.array, posterior_matrix: np.array) -> np.array:
-
         # Update p(z|d, w)
         for i in range(self.ncorpus):
             term_idx = i % self.nterms
